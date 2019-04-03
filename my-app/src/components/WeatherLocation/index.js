@@ -7,20 +7,22 @@ import WeatherData from "./WeatherData";
 import { SUNNY } from "../../constants/Weathers";
 import "./styles.css";
 
-const data = {
-  temperature: 25,
-  weatherState: SUNNY,
-  humidity: 10,
-  wind: "10 m/s"
-};
-
 class WeatherLocation extends Component {
   constructor() {
     super();
     this.state = {
-      city: "Madrid",
-      data: data
+      city: "Bogotá",
+      data: null
     };
+    console.log("constructor");
+  }
+
+  componentDidMount() {
+    console.log("componentDidMount");
+    this.handleUpdate();
+  }
+  componentDidUpdate(prevProps, prevState) {
+    console.log("componentDidUpdate");
   }
 
   handleUpdate = () => {
@@ -34,12 +36,12 @@ class WeatherLocation extends Component {
       });
   };
   render() {
+    console.log("render");
     const { city, data } = this.state;
     return (
       <div className="weatherLocationCont">
         <Location city={city} />
-        <WeatherData data={data} />
-        <button onClick={this.handleUpdate}>Actualizar</button>
+        {data ? <WeatherData data={data} /> : "Cargando..."}
       </div>
     );
   }
