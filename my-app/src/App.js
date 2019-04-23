@@ -27,7 +27,9 @@ class App extends Component {
           <Col xs={12} md={6}>
             <LocationList cities={cities} />
           </Col>
-          <Col xs={12} md={6} />
+          <Col xs={12} md={6}>
+            <div className="ditails" />
+          </Col>
         </Row>
       </Grid>
     );
