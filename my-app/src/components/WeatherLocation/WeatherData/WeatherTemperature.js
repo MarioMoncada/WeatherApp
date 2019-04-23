@@ -3,24 +3,22 @@ import WeatherIcons from "react-weathericons";
 import PropTypes from "prop-types";
 import {
   CLOUD,
-  CLOUDY,
   SUNNY,
   RAIN,
   SNOW,
-  FOG,
-  WINDY
+  THUNDER,
+  DRIZZLE
 } from "../../../constants/Weathers"; // constantes que estamos exportado desde el archivo Weather.js
 import "./styles.css";
 
 const icons = {
   // este es un diccionario el cual contiene los nombres de los iconos que va a recibir la funcion
   [CLOUD]: "cloud",
-  [CLOUDY]: "cloudy",
   [SUNNY]: "day-sunny",
   [RAIN]: "rain",
   [SNOW]: "snow",
-  [FOG]: "day-fog",
-  [WINDY]: "windy"
+  [THUNDER]: "day-thunderstore",
+  [DRIZZLE]: "day-showers"
 };
 
 const getWeatherIcon = weatherState => {
@@ -46,7 +44,7 @@ const WeatherTemperature = ({ temperature, weatherState }) => (
 );
 
 // eslint-disable-next-line react/no-typos
-WeatherTemperature.PropTypes = {
+WeatherTemperature.propTypes = {
   temperature: PropTypes.number.isRequired,
   weatherState: PropTypes.string.isRequired
 };

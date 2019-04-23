@@ -1,17 +1,19 @@
 import React, { Component } from "react"; //componente funcional o componente de funcion
 // es el componente mas sencillo de realizar. antes este componente era funcional, ahora es componente de clase
+import LinearProgress from "@material-ui/core/LinearProgress";
+import { PropTypes } from "prop-types";
+import getUrlWeatherByCity from "./../../services/getUrlWeatherByCity";
 import transformWeather from "./../../services/transformWeather";
-import { api_weather } from "./../../constants/api_url";
 import Location from "./Location";
 import WeatherData from "./WeatherData";
-import { SUNNY } from "../../constants/Weathers";
 import "./styles.css";
 
 class WeatherLocation extends Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
+    const { city } = props;
     this.state = {
-      city: "Bogotá",
+      city,
       data: null
     };
     console.log("constructor");
@@ -26,6 +28,7 @@ class WeatherLocation extends Component {
   }
 
   handleUpdate = () => {
+    const api_weather = getUrlWeatherByCity(this.state.city);
     fetch(api_weather)
       .then(resolve => {
         return resolve.json();
@@ -36,15 +39,17 @@ class WeatherLocation extends Component {
       });
   };
   render() {
-    console.log("render");
     const { city, data } = this.state;
     return (
       <div className="weatherLocationCont">
         <Location city={city} />
-        {data ? <WeatherData data={data} /> : "Cargando..."}
+        {data ? <WeatherData data={data} /> : <LinearProgress />}
       </div>
     );
   }
 }
+WeatherLocation.propTypes = {
+  city: PropTypes.string.isRequired
+};
 
 export default WeatherLocation;

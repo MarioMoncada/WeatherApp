@@ -8,7 +8,7 @@ const WeatherExtraInfo = ({ humidity, wind }) => (
   </div>
 );
 // eslint-disable-next-line react/no-typos
-WeatherExtraInfo.PropTypes = {
+WeatherExtraInfo.propTypes = {
   humidity: PropTypes.number.isRequired,
   wind: PropTypes.string.isRequired
 };
