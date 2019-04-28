@@ -1,7 +1,9 @@
 import React, { Component } from "react";
 import LocationList from "./components/LocationList";
+import ForecastExtended from "./components/ForecastExtended";
 import { Grid, Col, Row } from "react-flexbox-grid";
 import { Navbar, Nav } from "react-bootstrap";
+
 import "./App.css";
 const cities = [
   "Buenos Aires,ar",
@@ -13,7 +15,16 @@ const cities = [
 ];
 
 class App extends Component {
+  constructor() {
+    super();
+    this.state = { city: "" };
+  }
+  handleSelectedLocation = city => {
+    this.setState = { city };
+    console.log(`handleSelectLocation ${city}`);
+  };
   render() {
+    const { city } = this.state;
     return (
       <Grid>
         <Row />
@@ -25,10 +36,15 @@ class App extends Component {
         </Navbar>
         <Row>
           <Col xs={12} md={6}>
-            <LocationList cities={cities} />
+            <LocationList
+              cities={cities}
+              onSelectedLocation={this.handleSelectedLocation}
+            />
           </Col>
           <Col xs={12} md={6}>
-            <div className="ditails" />
+            <div className="ditails">
+              <ForecastExtended city={city} />
+            </div>
           </Col>
         </Row>
       </Grid>
