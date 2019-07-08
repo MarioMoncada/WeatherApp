@@ -17,23 +17,26 @@ const cities = [
 class App extends Component {
   constructor() {
     super();
-    this.state = { city: "" };
+    this.state = { city: null };
   }
   handleSelectedLocation = city => {
-    this.setState = { city };
+    this.setState({ city });
     console.log(`handleSelectLocation ${city}`);
   };
   render() {
     const { city } = this.state;
     return (
       <Grid>
-        <Row />
-        <Navbar bg="dark" variant="dark">
-          <Navbar.Brand href="#home">World's Weather</Navbar.Brand>
-          <Nav className="mr-auto">
-            <Nav.Link href="#home">Home</Nav.Link>
-          </Nav>
-        </Navbar>
+        <Row>
+          <Col xs={12} md={6} lg={12}>
+            <Navbar bg="dark" variant="dark">
+              <Navbar.Brand href="#home">World's Weather</Navbar.Brand>
+              <Nav className="mr-auto">
+                <Nav.Link href="#home">Home</Nav.Link>
+              </Nav>
+            </Navbar>
+          </Col>
+        </Row>
         <Row>
           <Col xs={12} md={6}>
             <LocationList
@@ -43,7 +46,11 @@ class App extends Component {
           </Col>
           <Col xs={12} md={6}>
             <div className="ditails">
-              <ForecastExtended city={city} />
+              {city === null ? (
+                <h1>No se seleccionó ciudad</h1>
+              ) : (
+                <ForecastExtended city={city} />
+              )}
             </div>
           </Col>
         </Row>
